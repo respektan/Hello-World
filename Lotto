@@ -1,0 +1,71 @@
+
+        Lotto
+
+
+        Scanner scanner = new Scanner(System.in);
+        int first = 0;
+        while (first < 1|| first > 49){
+            System.out.print("Podaj pierwsza liczbe z zakresu 1-49: ");
+            first = scanner.nextInt();
+        }
+
+        int second = 0;
+        while (second < 1|| second > 49){
+            System.out.print("Podaj druga liczbe z zakresu 1-49: ");
+            second = scanner.nextInt();
+        }
+            while (second == first){
+                System.out.print("Taka cyfra zostala juz wskazana - podaj inna:");
+                second = scanner.nextInt();
+                }
+
+        int third = 0;
+        while (third < 1 || third> 49){
+            System.out.print("Podaj trzecia liczbe z zakresu 1-49: ");
+            third = scanner.nextInt();
+        }
+        while (third == first || third == second){
+            System.out.print("Taka cyfra zostala juz wskazana - podaj inna:");
+            third  = scanner.nextInt();
+        }
+
+        int forth= 0;
+        while (forth < 1 || forth > 49 ){
+            System.out.print("Podaj czwarta liczbe z zakresu 1-49: ");
+            forth = scanner.nextInt();
+        }
+        while (forth == first || forth == second || forth == third){
+            System.out.print("Taka cyfra zostala juz wskazana - podaj inna:");
+            forth  = scanner.nextInt();
+        }
+
+        int fifth= 0;
+        while (fifth < 1 || fifth > 49){
+            System.out.print("Podaj piata liczbe z zakresu 1-49: ");
+            fifth  = scanner.nextInt();
+        }
+            while (fifth == first || fifth  == second || fifth == third || fifth == forth){
+                System.out.print("Taka cyfra zostala juz wskazana - podaj inna:");
+                fifth   = scanner.nextInt();
+            }
+
+        int sixth= 0;
+        while ( sixth  < 1 || sixth  > 49 ){
+            System.out.print("Podaj szosta liczbe z zakresu 1-49: ");
+            sixth   = scanner.nextInt();
+        }
+        while (sixth  == first || sixth  == second || sixth  == third || sixth  == forth || sixth == fifth ){
+            System.out.print("Taka cyfra zostala juz wskazana - podaj inna:");
+            sixth = scanner.nextInt(); 
+            
+            int[] array = new int[50];
+        Random random = new Random();
+        int randomInt = random.nextInt(49) + 1;
+
+        for (int i = 1; i < array.length ; i++){
+            array[i] = random.nextInt(49) + 1;
+        }
+
+        for(int i = 1 ; i < array.length ; i++){
+            System.out.println("Index no. " + i + "\tvalue: " + array[i]);
+        }
