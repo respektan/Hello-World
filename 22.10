@@ -1,0 +1,76 @@
+
+        // Zadanie 1 22.10 - Stworzenie pliku i wypelnienie go danymi
+//
+//        Files.createFile(Paths.get("/home/aka/Desktop/testowy.txt"));
+//        PrintWriter zapis = new PrintWriter("/home/aka/Desktop/testowy.txt");
+//        zapis.println("Natalia \nKasia \nAsia \nBasia \nAnna");
+//        zapis.close();
+
+//        String[] names = new String[5];
+//
+//        names[0] = "jan";
+//        names[1] = "adam";
+//        names[2] = "michal";
+//        names[3] = "marcel";
+//        names[4] = "adrian";
+//        PrintWriter pw = new PrintWriter("/home/aka/Desktop/zad1.txt");
+//
+////        for (String name: names){
+//        pw.print(name + "\n");
+//    }
+//    pw.close();
+
+
+        //ZDANIE 2 - 22.10
+//        Scanner scanner = new Scanner (System.in);
+//        System.out.println( "Podaj imie i nazwisko: ");
+//        String nameSurname = scanner.nextLine();
+//        PrintWriter zapis = new PrintWriter("/home/aka/Desktop/zad2.txt");
+//        zapis.println(nameSurname);
+//        zapis.close();
+
+
+        //ZADANIE 3 - 22.10
+        //losowanie
+//        int[] los1 = new int[100];
+//        int[] los2 = new int[100];
+//
+//        Random random = new Random();
+//
+//        //zapis losowania
+//        PrintWriter pwLos1 = new PrintWriter("/home/aka/Desktop/zad3.txt");
+//        PrintWriter pwLos2 = new PrintWriter("/home/aka/Desktop/zad4.txt");
+//
+//        for(int i = 0; i <100; i++){
+//            pwLos1.append((random.nextInt(100) +1) + "\n");
+//             pwLos2.append((random.nextInt(100) +1) + "\n");
+//
+//             pwLos1.close();
+//             pwLos2.close();
+//
+//            List<String> listLos1 = Files.readAllLines(Paths.get("/home/aka/Desktop/zad4.txt"));
+//            List<String> listLos2 = Files.readAllLines(Paths.get("/home/aka/Desktop/zad5.txt"));
+//
+//            int hits = 0;
+//
+//            for(String elementLos1)
+//
+        //zadanie  4
+
+        Scanner scanner = new Scanner (System.in);
+        System.out.println( "Podaj jakis text: ");
+        String txt = scanner.nextLine();
+        
+        PrintWriter reverse = new PrintWriter("/home/aka/Desktop/zad7.txt");
+        String reverseText;
+        char[] letters = txt.toCharArray();
+        for(int i = letters.length -1; i >=0; i--){
+            reverseText+=[i];
+        }
+        reverse.print(reverseText);
+        reverse.close();
+        
+                
+                
+        }
+}
