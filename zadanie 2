@@ -1,0 +1,23 @@
+        URL url = new URL("https://www.w3.org/TR/PNG/iso_8859-1.txt");
+        Scanner scanner = new Scanner(url.openStream());
+        while(scanner.hasNextLine())
+        System.out.println(scanner.nextLine());
+
+        PrintWriter letters = new PrintWriter("C://Users//respektan//Desktop/letters.txt");
+        PrintWriter numbers = new PrintWriter("C://Users//respektan//Desktop/numbers.txt");
+
+       String line;
+        while(scanner.hasNextLine()){
+            line = scanner.nextLine();
+            if(Character.isDigit(line.charAt(0))){
+                PrintWriter numbers = new PrintWriter("C://Users//respektan//Desktop/numbers.txt");
+                numbers.println(numbers);
+                numbers.close();
+            }
+            else {
+                //letters.print(line);
+                PrintWriter letters = new PrintWriter("C://Users//respektan//Desktop/letters.txt");
+                letters.println(letters);
+                letters.close();
+            }
+        }
