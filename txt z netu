@@ -1,0 +1,23 @@
+Plik txt z neta 
+
+URL url = new URL("https://www.w3.org/TR/PNG/iso_8859-1.txt");
+        Scanner scanner = new Scanner(url.openStream());
+//        String file = scanner.nextLine();
+        int lineNumber = 1;
+        while(scanner.hasNextLine()){
+            String line = scanner.nextLine();
+            System.out.println("line " + lineNumber + " :" + line);
+            String[] a = line.split("   ");
+            System.out.println(a.length);
+            lineNumber++;
+        }
+
+//        while(scanner.hasNext()) {
+//            System.out.println(scanner.nextLine());
+//           String[] tab =  scanner.nextLine().split(" ");
+//           System.out.println(tab[0]);
+//           int a = tab.length;
+//           String b = a > 1 ? tab[1] : "--------------------------------";
+//           System.out.println(b);
+//        }
+//        List<String> lines = Files
