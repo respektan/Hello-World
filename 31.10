@@ -1,0 +1,32 @@
+//        Bike bike = new Bike();
+////        System.out.println(bike.numberOfWheels);
+////        System.out.println(bike.getFrameMaterial());
+////
+////        Car car = new Car();
+////        System.out.println(car.numberOfWheels);
+////        car.printModel(); //jesli w clasie jest void to nie dodawac sout!
+
+
+
+package pi.infoshare.exersize1;
+
+public class Bike {
+
+    public int numberOfWheels = 2;
+
+    public String getFrameMaterial(){
+        return "Steel";
+
+    }
+}
+
+
+package pi.infoshare.excersize2;
+
+class Car {
+    byte numberOfWheels = 4;
+
+    void printModel(){
+        System.out.println("Mazda");
+    }
+}
