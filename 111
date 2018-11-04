@@ -1,0 +1,280 @@
+package infoshare;
+
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
+import java.util.List;
+import java.util.Scanner;
+
+
+public class Zad2 {
+
+    public static void main(String[] args) throws IOException {
+        //Wywolanie glownej metody
+        start();
+    }
+
+    /*
+      Metoda rozpoczynajaca program
+     */
+    private static void start() throws IOException {
+        //Wywolanie metody wyswietlajacej menu
+        printMenu();
+
+        //Wczytanie wyboru uzytkownika
+        String userChoice = readUserInput();
+
+        //Wywolaj metode do obslugi wyboru uzytkownika i przekaz pobrany z klawiatury wybor
+        handleUserChoice(userChoice);
+    }
+
+    /*
+      Metoda obslugujaca wybor uzytkownika
+     */
+    private static void handleUserChoice(String choice) throws IOException {
+        //Obsluga wyboru uzytkownika
+        switch (choice) {
+            //Jesli uzytkownik wybierze 1
+            case "1": {
+                createNewUser();
+
+                //Zerwanie switch
+                break;
+            }
+            //Jesli uzytkownik wybierze 2
+            case "2": {
+                //Wczytanie linii z pliku
+                List<String> fileLines = readLinesFromFile();
+                //Stworzenie tablicy uzytkownikow
+                User[] userArray = generateUserArray(fileLines);
+                //Wypisanie tablicy uzytkownikow na ekran
+                printUsersFromArray(userArray);
+
+                start();
+                //Zerwanie switch
+                break;
+            }
+
+            case "0": {
+                break;
+            }
+
+            //Jesli uzytkownik wybierze cokolwiek innego
+            default: {
+                printError();
+                break;
+            }
+        }
+    }
+
+    /*
+      Metoda tworzaca nowego uzytkownika
+     */
+    private static void createNewUser() throws IOException {
+        //Wywolaj metode, ktora poprosi o username i password i przypisz nowy obiekt do zmiennej
+        User user = generateUserFromUserInput();
+        //Zapisz usera do pliku
+        saveToFile(user);
+        //Wypisz informacje o poprawnie wykonanej operacji
+        printSuccess();
+        //Zapytaj uzytkownika czy chce dodac kolejnego usera
+        shouldAddAnotherUser();
+    }
+
+    /*
+      Metoda odpowiadajaca za zapytanie uzytkownika, czy chce dodac kolejnego usera
+     */
+    private static void shouldAddAnotherUser() throws IOException {
+        System.out.println("Chcesz dodac kolejnego uzytkownika? [Y/N]");
+        String input = readUserInput();
+        if (input.equals("Y")) {
+            createNewUser();
+        } else if (input.equals("N")) {
+            start();
+        } else {
+            System.out.println("Bledna komenda ");
+            shouldAddAnotherUser();
+        }
+    }
+
+    /*
+      Metoda wypisujaca uzytkownikow na ekran z podanej tablicy
+     */
+    private static void printUsersFromArray(User[] userArray) {
+        for (User user : userArray) {
+            System.out.println("Username: " + user.getUsername() + "\t" + "Password: " + user.getPassword() + "\t" + "Usertype: " + user.getUsertype());
+        }
+    }
+
+    /*
+      Metoda tworzaca tablice uzytkownikow z listy wierszy z pliku
+     */
+    private static User[] generateUserArray(List<String> linesFromFile) {
+        User[] userArray = new User[linesFromFile.size()];
+
+        for (int i = 0; i < userArray.length; i++) {
+            userArray[i] = generateUserFromFileInput(linesFromFile.get(i));
+        }
+        return userArray;
+    }
+
+    /*
+      Metoda wczytujaca wszystkie linie z pliku
+     */
+    private static List<String> readLinesFromFile() throws IOException {
+        return Files.readAllLines(Paths.get("./zad5.txt"));
+    }
+
+    /*
+      Metoda ktora wyswietla menu
+     */
+    private static void printMenu() {
+        System.out.println();
+        System.out.println("========== MENU ==========");
+        System.out.println("1.\t Dodaj uzytkownika.");
+        System.out.println("2.\t Wyświetl uzytkowników.");
+        System.out.println();
+        System.out.println("0.\t Wyjdz z programu.");
+        System.out.print("Wybor: ");
+    }
+
+    /*
+      Metoda do wypisywania informacji o poprawnie wykonanej operacji
+     */
+    private static void printSuccess() {
+        System.out.println("WYKONANO POPRAWNIE!");
+    }
+
+    /*
+      Metoda do wypisywania informacji o zle wykonanej operacji
+     */
+    private static void printError() {
+        System.out.println("BLAD! Zly wybor. Zrestartuj program");
+    }
+
+    /*
+      Metoda tworzaca obiekt usera z wczytanego jednego wiersza z pliku
+     */
+    private static User generateUserFromFileInput(String lineFromFile) {
+        String[] userSplitted = lineFromFile.split(";");
+        return new User(userSplitted[0], userSplitted[1], userSplitted[2]);
+    }
+
+    /*
+      Metoda zapisujaca wiele obiektow User do pliku
+     */
+    private static void saveToFile(User... users) throws IOException {
+        for (User user : users) {
+            String line = user.getUsername() + ";" + user.getPassword() + ";" + user.getUsertype() + "\n";
+
+            Path path = Paths.get("./zad5.txt");
+            //Sprawdz czy plik istnieje
+            if (Files.exists(path)) {
+                //Dopisanie do pliku tekstu z uzytkownikiem
+                Files.write(path, line.getBytes(), StandardOpenOption.APPEND);
+            } else {
+                //Jesli nie istnieje stworz go i wpisz do niego podana linie
+                Files.write(path, line.getBytes());
+            }
+        }
+    }
+
+    /*
+      Metoda proszaca o podanie username i password uzytkownika.
+     */
+    private static User generateUserFromUserInput() {
+//        return new User(getFieldFromUserInput("username"), getFieldFromUserInput("password"), getFieldFromUserInput("usertype"));
+
+        getFieldFromUserInput("username")
+
+        String username = getFieldFromUserInput("username");
+        String password = getFieldFromUserInput("password");
+        String usertype = typeOfUser("usertype");
+
+        return new User(username, password, usertype);
+    }
+
+    /*
+      Metoda wczytujaca pojedyncza informacje od uzytkownika i zwracajaca to co wpisal uzytkownik
+     */
+    private static String getFieldFromUserInput(String field) {
+        System.out.print("Wprowadz " + field + ": ");
+        return readUserInput();
+    }
+
+    /*
+      Metoda wczytujaca tekst wpisany przez uzytkownika
+     */
+    private static String readUserInput() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextLine();
+
+    }
+      /*Metoda pytajaca o rodzaj uzytkownika*/
+    private static String gettypeOfUser() {
+        System.out.println("Wprowadz typ uzytkownika: [user / admin]");
+        String input = readUserInput();
+        return input;
+    }
+
+    private static boolean validtypeofuser() 
+//        if (input.equals("user")) {
+//            saveToFile();
+//
+//        } else if (input.equals("admin")) {
+//            saveToFile();
+//
+//        } else {
+//            System.out.println("Wprowadziles bledny typ uzytkownika!");
+//            typeOfUser();
+//        }
+//
+//    }
+}
+
+------------------------------------------------------------------------------
+
+package infoshare;
+
+public class User {
+
+    private String username;
+    private String password;
+    private String usertype;
+
+    public User(String username, String password, String usertype) {
+        this.username = username;
+        this.password = password;
+        this.usertype = usertype;
+    }
+
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUsertype() {
+        return usertype;
+    }
+
+    public void setUsertype(String usertype) {
+        this.usertype = usertype;
+    }
+}
+
+
+
