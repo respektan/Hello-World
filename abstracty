@@ -1,0 +1,63 @@
+package dziedziczenie;
+
+
+import Przeslanianie.Animal;
+import Przeslanianie.Geacon;
+import Przeslanianie.Spider;
+
+public class App {
+    public static void main(String[] args) {
+
+
+        Animal geacon = new Geacon();
+        Animal spider = new Spider();
+        Animal chicken = new Animal() {
+            @Override
+            public String getPokrycieCiala() {
+                return "Piora";
+            }
+        };
+
+        System.out.println("Geacon ma pokrycie z " + geacon.getPokrycieCiala());
+        System.out.println("Spider ma pokrycie z " + spider.getPokrycieCiala());
+        System.out.println("Chicken ma pokrycie z " + chicken.getPokrycieCiala());
+
+    }
+}
+-------------------------------
+
+package Przeslanianie;
+
+public abstract class Animal {
+
+    public byte getLiczbaOczu(){
+        return 2;
+    }
+    public short getLiczbaNog(){
+        return 4;
+    }
+    public abstract String getPokrycieCiala();
+
+}
+--------------------------------------
+package Przeslanianie;
+
+public class Spider extends Animal {
+
+    @Override
+    public String getPokrycieCiala(){
+        return "Wlosy";
+    }
+}
+---------------------------------------
+package Przeslanianie;
+
+public class Geacon extends Animal{
+
+    @Override
+    public String getPokrycieCiala() {
+        return "Luski";
+    }
+}
+
+
